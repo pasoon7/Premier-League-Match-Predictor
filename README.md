@@ -59,6 +59,34 @@ Predicts the outcome (home/draw/away) and each team's expected goals (xG) for Pr
 - Dropped matches after 2025-12-02, since xG data is not available for them.
 - 1,942 matches remain after cleaning. 128 are from the partial 2025-26 season and are not used for training or testing.
 
+## Final Output: Outcome and xG Predictions
+
+For each match the model gives outcome probabilities, a predicted xG for each team, and its pick. Below are the first three matches of the 2024-25 test set.
+
+```text
+Manchester United vs Fulham  (2024-08-16)
+  Home win: 51% | Draw: 25% | Away win: 25%
+  Predicted xG: 1.98 - 1.16
+  Predicted: Manchester United win  |  Actual: Manchester United win  (correct)
+  Actual xG: 2.04 - 0.42
+
+Nottingham Forest vs Bournemouth  (2024-08-17)
+  Home win: 45% | Draw: 25% | Away win: 30%
+  Predicted xG: 1.67 - 1.31
+  Predicted: Nottingham Forest win  |  Actual: Draw  (incorrect)
+  Actual xG: 1.24 - 1.91
+
+Newcastle United vs Southampton  (2024-08-17)
+  Home win: 88% | Draw: 8% | Away win: 4%
+  Predicted xG: 2.72 - 0.95
+  Predicted: Newcastle United win  |  Actual: Newcastle United win  (correct)
+  Actual xG: 0.43 - 1.95
+```
+- The "Actual" lines are for comparision and are not inputs
+- The outcome probabilities come from the logistic regression, whereas the predicted xG comes from the linear regression models.
+- Newcastle vs Southampton shows how noisy single matches can be. Newcastle won the match despite heavily losing out on xG.
+
+
 ## Method 
 **1. Features**
 
@@ -141,7 +169,7 @@ soccer-predictor/
 
 - Streamlit app for interactive predictions
 - Live predictions for upcoming fixtures with an automatically updated accuracy tracker
-- Additional data: injuries, lineups, and a longer match history
+- Improve on the current 54.4% outcome accuracy: add earlier season data, injury and lineup data, team ratings and more.
 - Probability calibration and weighting recent seasons more heavily
 
 ## Acknowledgements
